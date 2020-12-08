@@ -1,6 +1,7 @@
 
 package tf_poo_20201;
 
+import java.io.FileReader;
 import java.util.Calendar;
 
 
@@ -19,7 +20,8 @@ public class Pessoa {
     }
 
     public void excluiPessoa(String numRegistro){
-        
+        FileReader pessoas = new FileReader("src/arquivo.txt");
+
     }
 
     public void consultaPessoa(String numRegistro){
