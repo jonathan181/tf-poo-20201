@@ -5,29 +5,34 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Autor extends Pessoa {
-    private String principaisObras;
-    private String nacionalidade;
+public class Locador extends Pessoa {
+    private String cpf;
+    private String telefone;
+    private String livrosLocados;
 
-    public Autor(String numRegistro, String nome, Date dataNascimento, String email, String principaisObras,
-            String nacionalidade) {
+
+    public Locador(String numRegistro, String nome, Date dataNascimento, String email, String cpf,
+            String telefone, String livrosLocados) {
         super(numRegistro, nome, dataNascimento, email);
-        this.principaisObras = principaisObras;
-        this.nacionalidade = nacionalidade;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.livrosLocados = livrosLocados;
+
     }
 
-    public boolean cadastra(Autor autor) {
+    public boolean cadastra(Locador locador) {
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            File arquivo = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autores.txt");
-            FileWriter autores = new FileWriter(arquivo, true);
-            PrintWriter out = new PrintWriter(autores);
+            File arquivo = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadores.txt");
+            FileWriter locadores = new FileWriter(arquivo, true);
+            PrintWriter out = new PrintWriter(locadores);
             out.println(super.getNumRegistro());
             out.println(super.getNome());
             out.println(formatador.format(super.getDataNascimento()));
             out.println(super.getEmail());
-            out.println(this.principaisObras);
-            out.println(this.nacionalidade);
+            out.println(this.cpf);
+            out.println(this.telefone);
+            out.println(this.livrosLocados);
 
             out.flush();
             out.close();
@@ -42,18 +47,18 @@ public class Autor extends Pessoa {
     public boolean exclui(String numRegistro) throws IOException {
         try {
 
-            File arquivoOriginal = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autores.txt");
-            FileReader autoresOriginal = new FileReader(arquivoOriginal);
-            BufferedReader in = new BufferedReader(autoresOriginal);
+            File arquivoOriginal = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadores.txt");
+            FileReader locadoresOriginal = new FileReader(arquivoOriginal);
+            BufferedReader in = new BufferedReader(locadoresOriginal);
 
-            File arquivoNovo = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autoresAux.txt");
-            FileWriter autoresNovo = new FileWriter(arquivoNovo);
-            PrintWriter out = new PrintWriter(autoresNovo);
+            File arquivoNovo = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadoresAux.txt");
+            FileWriter locadoresNovo = new FileWriter(arquivoNovo);
+            PrintWriter out = new PrintWriter(locadoresNovo);
 
             String s;
             while ((s = in.readLine()) != null) {
                 if (s.equals(numRegistro)) {
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < 6; i++)
                         s = in.readLine();
                 } else {
                     out.println(s);
@@ -79,8 +84,8 @@ public class Autor extends Pessoa {
     @Override
     public Object consulta(String numRegistro) throws IOException {
         try {
-            FileReader autores = new FileReader("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autores.txt");
-            BufferedReader in = new BufferedReader(autores);
+            FileReader locadores = new FileReader("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadores.txt");
+            BufferedReader in = new BufferedReader(locadores);
 
             String s;
             while ((s = in.readLine()) != null) {
@@ -94,10 +99,11 @@ public class Autor extends Pessoa {
                         String nome = in.readLine();
                         data = (Date) formato.parse(in.readLine());
                         String email = in.readLine();
-                        String principaisObras = in.readLine();
-                        String nacionalidade = in.readLine();
+                        String cpf = in.readLine();
+                        String telefone = in.readLine();
+                        String livrosLocados = in.readLine();
 
-                        return new Autor(numRegistroLocal, nome, data, email, principaisObras, nacionalidade);
+                        return new Locador(numRegistroLocal, nome, data, email, cpf, telefone, livrosLocados);
 
                     } catch (ParseException e) {
                         System.out.println("Erro: " + e);
@@ -115,50 +121,58 @@ public class Autor extends Pessoa {
         }
     }
 
-    public boolean altera(Autor autor) throws IOException {
+    public boolean altera(Locador locador) throws IOException {
         try {
 
-            File arquivoOriginal = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autores.txt");
-            FileReader autoresOriginal = new FileReader(arquivoOriginal);
-            BufferedReader in = new BufferedReader(autoresOriginal);
+            File arquivoOriginal = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadores.txt");
+            FileReader locadoresOriginal = new FileReader(arquivoOriginal);
+            BufferedReader in = new BufferedReader(locadoresOriginal);
 
-            File arquivoNovo = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autoresAux.txt");
-            FileWriter autoresNovo = new FileWriter(arquivoNovo);
-            PrintWriter out = new PrintWriter(autoresNovo);
+            File arquivoNovo = new File("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadoresAux.txt");
+            FileWriter locadoresNovo = new FileWriter(arquivoNovo);
+            PrintWriter out = new PrintWriter(locadoresNovo);
 
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String s;
             while ((s = in.readLine()) != null) {
 
-                if (s.equals(autor.getNumRegistro())) {
-                    s = autor.getNumRegistro();
+                if (s.equals(locador.getNumRegistro())) {
+                    s = locador.getNumRegistro();
                     out.println(s);
                     out.flush();
 
                     s = in.readLine();
-                    s = autor.getNome();
+                    s = locador.getNome();
                     out.println(s);
                     out.flush();
 
                     s = in.readLine();
-                    s = formatador.format(autor.getDataNascimento());
+                    s = formatador.format(locador.getDataNascimento());
                     out.println(s);
                     out.flush();
 
                     s = in.readLine();
-                    s = autor.getEmail();
+                    s = locador.getEmail();
+                    out.println(s);
+                    out.flush();
+
+
+                    s = in.readLine();
+                    s = locador.getCpf();
                     out.println(s);
                     out.flush();
 
                     s = in.readLine();
-                    s = autor.getPrincipaisObras();
+                    s = locador.getTelefone();
                     out.println(s);
                     out.flush();
 
                     s = in.readLine();
-                    s = autor.getNacionalidade();
+                    s = locador.getLivrosLocados();
                     out.println(s);
                     out.flush();
+
+
                 } else {
                     out.println(s);
                     out.flush();
@@ -183,13 +197,13 @@ public class Autor extends Pessoa {
 
     public boolean lista() throws IOException {
         try {
-            FileReader autores = new FileReader("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/autores.txt");
-            BufferedReader in = new BufferedReader(autores);
+            FileReader locadores = new FileReader("C:/Users/yuri-/Desktop/TrabalhoPOO/tf_poo_20201/Arquivos/locadores.txt");
+            BufferedReader in = new BufferedReader(locadores);
 
             String s;
             while ((s = in.readLine()) != null) {
                 System.out.print(this.consulta(s).toString());
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 6; i++)
                     s = in.readLine();
             }
             in.close();
@@ -201,28 +215,38 @@ public class Autor extends Pessoa {
         }
     }
 
-    public String getPrincipaisObras() {
-        return this.principaisObras;
+    public String getLivrosLocados() {
+        return this.livrosLocados;
     }
 
-    public void setPrincipaisObras(String principaisObras) {
-        this.principaisObras = principaisObras;
+    public void setLivrosLocados(String livrosLocados) {
+        this.livrosLocados = livrosLocados;
     }
 
-    public String getNacionalidade() {
-        return this.nacionalidade;
+    public String getCpf() {
+        return this.cpf;
     }
 
-    public void setNacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
+
+
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
 
     @Override
     public String toString() {
-        return "==========================================================\n" + "Autor " + getNome() + ":\n\n"
+        return "==========================================================\n" + "Locador " + getNome() + ":\n\n"
                 + "Número de Registro: " + getNumRegistro() + "\nNome: " + getNome() + "\nData de Nascimento: "
-                + getDataNascimento() + "\nE-mail: " + getEmail() + "\nPrincipais Obras: " + getPrincipaisObras()
-                + "\nNacionalidade: " + getNacionalidade()
+                + getDataNascimento() + "\nE-mail: " + getEmail() + "\nCPF: " + getCpf()
+                + "\nLivros Locados: " + getLivrosLocados() + "\nTelefone: " + getTelefone()
                 + "\n==========================================================\n";
     }
 

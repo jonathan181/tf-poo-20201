@@ -1,5 +1,5 @@
--Trocar de Date para Calendar na classe Pessoa.
 -Colocar numRegistro antes de nome no diagrama.
 -Tirar dataNascimento de Autor e deixar só em pessoa.
 -Tirar nome de Locador e deixar só em pessoa.
 -Indicar que Pessoa é uma classe abstrata.
+-Mudar as alteras em Autor e Locador

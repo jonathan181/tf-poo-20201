@@ -1,5 +1,18 @@
-package tf_poo_20201.Arquivos;
-
-public class autor {
-    
-}
+0002
+Yuri Oliveira
+20/04/2000
+yurireis@disente.ufg.br
+Livro 4 Livro 7
+Argentina
+0001
+Yuri Brabo
+23/11/2017
+yurireis@disente.ufg.br
+Livro 1 Livro 5
+Brasil
+0003
+Yuri Rambo
+23/11/2040
+yurireis@disente.ufg.br
+Livro 1 Livro 5
+Brasil
